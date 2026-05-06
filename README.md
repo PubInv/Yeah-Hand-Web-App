@@ -1,73 +1,50 @@
-# React + TypeScript + Vite
+# Yeah Hand Web App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Web app and backend bridge for controlling the Yeah Hand robotic/prosthetic hand.
 
-Currently, two official plugins are available:
+## System Architecture
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project has two main layers:
 
-## React Compiler
+### Firmware layer
+- Written in C/C++
+- Runs on the ESP32 inside the robotic hand
+- Controls the motors/fingers
+- Receives command strings such as `PINCH 50`
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Web/backend layer
+- Written in JavaScript/TypeScript
+- Runs on a PC/server, not on the hand
+- Provides the browser interface
+- Sends commands from the web app to the hand over Bluetooth/serial
 
-## Expanding the ESLint configuration
+The file `backend/services/BluetoothService.js` belongs to the backend layer. It is not firmware code.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+---
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+## Backend Bluetooth Service (WIP)
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+The current Bluetooth service simulates the connection and command flow so the backend structure can be tested without the physical hand.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Requirements
+
+- Node.js v20 recommended
+- npm
+
+### Setup
+
+```bash
+npm install
 ```
+### Run the simulated Bluetooth test
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+node backend/test/bluetoothTest.js
 ```
+### Expected Output
+```
+Connecting to Bluetooth device...
+Simulated Bluetooth connection established.
+Sending command to hand: PINCH 50
+Disconnecting from Bluetooth device...
+Bluetooth connection closed.
