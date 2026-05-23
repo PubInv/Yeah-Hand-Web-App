@@ -1,5 +1,6 @@
 import express from "express";
 import bluetoothService from "./services/BluetoothService.js";
+import { validateCommand } from "./services/commandValidator.js";
 
 const app = express();
 const PORT = 3001;
@@ -32,6 +33,15 @@ app.post("/api/hand/connect", (req, res) => {
 app.post("/api/hand/command", (req, res) => {
     try {
         const { command } = req.body;
+
+        const validation = validateCommand(command);
+
+        if (!validation.valid) {
+            return res.status(400).json({
+                success: false,
+                error: validation.error,
+            });
+        }
 
         bluetoothService.sendCommand(command);
 
