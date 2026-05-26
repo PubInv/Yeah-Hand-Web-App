@@ -1,10 +1,12 @@
 import express from "express";
 import bluetoothService from "./services/BluetoothService.js";
 import { validateCommand } from "./services/commandValidator.js";
+import cors from "cors";
 
 const app = express();
 const PORT = 3001;
 
+app.use(cors());
 app.use(express.json());
 
 // Health check route
