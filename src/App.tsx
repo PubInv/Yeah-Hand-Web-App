@@ -31,8 +31,13 @@ function App() {
             });
 
             const data = await response.json();
+            const commandLabel = command.split(" ")[0];
 
-            setStatus(data.message || data.error);
+            setStatus(
+                data.success
+                    ? `Sent ${commandLabel}`
+                    : data.error
+            );
         } catch {
             setStatus("Command failed");
         }
@@ -55,8 +60,41 @@ function App() {
     return (
         <div style={{ padding: "2rem", fontFamily: "sans-serif" }}>
             <h1>Yeah Hand Control Interface</h1>
+            <p
+                style={{
+                    color:
+                        status.includes("failed") ||
+                        status.includes("Invalid") ||
+                        status.includes("Closure") ||
+                        status.includes("Cannot") ||
+                        status.includes("not connected")
+                            ? "#f87171"
+                            : status.includes("Bluetooth device connected")
+                                ? "#60a5fa"
+                                : status.includes("Sent")
+                                    ? "#94a3b8"
+                                    : "#1f2937",
+                }}
+            >
+                Status: {status}
+            </p>
+            <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem" }}>
+                <button onClick={() => setCommand("PINCH 50")}>
+                    PINCH
+                </button>
 
-            <p>Status: {status}</p>
+                <button onClick={() => setCommand("POWER 100")}>
+                    POWER
+                </button>
+
+                <button onClick={() => setCommand("MONKEY 25")}>
+                    MONKEY
+                </button>
+
+                <button onClick={() => setCommand("RELAX")}>
+                    RELAX
+                </button>
+            </div>
 
             <div style={{ display: "flex", gap: "1rem" }}>
                 <input
