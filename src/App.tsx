@@ -18,7 +18,7 @@ function App() {
         }
     }
 
-    async function sendCommand() {
+    async function sendCommand(commandToSend = command) {
         try {
             const response = await fetch("http://localhost:3001/api/hand/command", {
                 method: "POST",
@@ -79,19 +79,19 @@ function App() {
                 Status: {status}
             </p>
             <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem" }}>
-                <button onClick={() => setCommand("PINCH 50")}>
+                <button onClick={() => sendCommand("PINCH 50")}>
                     PINCH
                 </button>
 
-                <button onClick={() => setCommand("POWER 100")}>
+                <button onClick={() => sendCommand("POWER 100")}>
                     POWER
                 </button>
 
-                <button onClick={() => setCommand("MONKEY 25")}>
+                <button onClick={() => sendCommand("MONKEY 25")}>
                     MONKEY
                 </button>
 
-                <button onClick={() => setCommand("RELAX")}>
+                <button onClick={() => sendCommand("RELAX")}>
                     RELAX
                 </button>
             </div>
