@@ -26,12 +26,12 @@ function App() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    command,
+                    command: commandToSend,
                 }),
             });
 
             const data = await response.json();
-            const commandLabel = command.split(" ")[0];
+            const commandLabel = commandToSend.split(" ")[0];
 
             setStatus(
                 data.success
