@@ -112,7 +112,7 @@ function App() {
                     Connect
                 </button>
 
-                <button onClick={sendCommand}>
+                <button onClick={() => sendCommand()}>
                     Send Command
                 </button>
 
