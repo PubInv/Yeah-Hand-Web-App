@@ -2,7 +2,7 @@ import { useState } from "react";
 
 function App() {
     const [status, setStatus] = useState("Not Connected");
-    const [command, setCommand] = useState("PINCH 50");
+    const [command, setCommand] = useState("PINCH");
 
     async function connectHand() {
         try {
@@ -31,11 +31,9 @@ function App() {
             });
 
             const data = await response.json();
-            const commandLabel = commandToSend.split(" ")[0];
-
             setStatus(
                 data.success
-                    ? `Sent ${commandLabel}`
+                    ? `Sent ${commandToSend}`
                     : data.error
             );
         } catch {
@@ -79,15 +77,15 @@ function App() {
                 Status: {status}
             </p>
             <div style={{ display: "flex", gap: "1rem", marginBottom: "1rem" }}>
-                <button onClick={() => sendCommand("PINCH 50")}>
+                <button onClick={() => sendCommand("PINCH")}>
                     PINCH
                 </button>
 
-                <button onClick={() => sendCommand("POWER 100")}>
+                <button onClick={() => sendCommand("POWER")}>
                     POWER
                 </button>
 
-                <button onClick={() => sendCommand("MONKEY 25")}>
+                <button onClick={() => sendCommand("MONKEY")}>
                     MONKEY
                 </button>
 
