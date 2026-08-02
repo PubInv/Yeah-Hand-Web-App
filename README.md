@@ -10,7 +10,7 @@ This project has two main layers:
 - Written in C/C++
 - Runs on the ESP32 inside the robotic hand
 - Controls the motors/fingers
-- Receives command strings such as `PINCH 50`
+- Receives gesture and factor commands separately, such as `PINCH` followed by `50`
 
 ### Web/backend layer
 - Written in JavaScript/TypeScript
@@ -33,12 +33,10 @@ Before getting started, make sure you have the following installed:
 
 ### Backend Setup
 
-From the project root, install the backend dependencies:
+The frontend and backend share the root `package.json`. From the project root, install all dependencies:
 
 ```bash
-cd backend
 npm install
-cd ..
 ```
 
 Start the backend server from the project root:
@@ -60,7 +58,8 @@ node backend/test/bluetoothTest.js
 ```text
 Connecting to Bluetooth device...
 Simulated Bluetooth connection established.
-Sending command to hand: PINCH 50
+Sending command to hand: PINCH
+Sending command to hand: 50
 Disconnecting from Bluetooth device...
 Bluetooth connection closed.
 ```

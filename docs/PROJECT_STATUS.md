@@ -28,7 +28,7 @@ Bluetooth Service
 ↓
 Yeah Hand Hardware
 
-The backend also streams webcam video to the frontend.
+Webcam streaming from the backend to the frontend is planned but not yet implemented.
 
 ---
 
@@ -39,7 +39,7 @@ PubInv/Yeah-Hand-Web-App
 
 Current Branch:
 
-GoodKimchi/____________________
+oscar/update-command-protocol
 
 Main Maintainer:
 
@@ -85,19 +85,15 @@ PINCH
 
 POWER
 
+POWERSMALL
+
 MONKEY
 
 RELAX
 
 Factor:
 
-0
-
-15
-
-40
-
-100
+Any integer from 0 through 100.
 
 Gesture and factor are sent separately.
 
