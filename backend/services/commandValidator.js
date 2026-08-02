@@ -14,36 +14,30 @@ export function validateCommand(command) {
         };
     }
 
-    const parts = command.trim().split(/\s+/);
+    const trimmedCommand = command.trim();
 
-    const commandName = parts[0];
-    const closureValue = parts[1];
-
-    // Validate command name
-    if (!VALID_COMMANDS.includes(commandName)) {
+    // Accept gesture commands by themselves
+    if (VALID_COMMANDS.includes(trimmedCommand)) {
         return {
-            valid: false,
-            error: `Invalid command: ${commandName}`,
+            valid: true,
         };
     }
 
-    // Validate optional closure percentage
-    if (closureValue !== undefined) {
-        const closureNumber = Number(closureValue);
+    // Accept factor values by themselves
+    const factor = Number(trimmedCommand);
 
-        if (
-            !Number.isInteger(closureNumber) ||
-            closureNumber < 0 ||
-            closureNumber > 100
-        ) {
-            return {
-                valid: false,
-                error: "Closure value must be an integer between 0 and 100.",
-            };
-        }
+    if (
+        Number.isInteger(factor) &&
+        factor >= 0 &&
+        factor <= 100
+    ) {
+        return {
+            valid: true,
+        };
     }
 
     return {
-        valid: true,
+        valid: false,
+        error: "Command must be a valid gesture or an integer between 0 and 100.",
     };
 }
