@@ -42,6 +42,10 @@ Plan and begin implementation of the webcam streaming feature.
 - Reviewed Vittorio's architecture requirements and implementation plan.
 - Updated project documentation to reflect the current project status.
 - Created the development plan for the webcam streaming feature.
+- - Implemented the initial backend webcam streaming infrastructure.
+- Added `WebcamService` to manage webcam streaming separately from Bluetooth.
+- Added the `/api/webcam/stream` backend endpoint.
+- Installed and configured FFmpeg for local development.
 
 ## Lessons Learned
 
@@ -49,8 +53,15 @@ Plan and begin implementation of the webcam streaming feature.
 - The frontend will only display the video stream while the backend manages hardware communication.
 - The webcam feature should be implemented independently from Bluetooth integration so both components remain modular.
 
+## Blockers
+
+- Desktop development machine does not currently have a webcam attached, so the streaming endpoint cannot be validated with real hardware yet.
+- Requested a USB webcam for development and testing.
+
 ## Next Session
 
-- Create the backend webcam service.
-- Add the webcam feed to the frontend.
-- Test the initial streaming implementation.
+## Next Session
+
+- Test backend streaming with a USB webcam.
+- Add the webcam feed to the React frontend.
+- Update the README with FFmpeg installation and setup instructions.

@@ -48,6 +48,8 @@ Main Maintainers:
 
 Vittorio Lumare
 
+Oscar Bedolla
+
 ---
 
 # Completed
@@ -59,6 +61,7 @@ Vittorio Lumare
 - [x] Connect endpoint
 - [x] Command endpoint
 - [x] Disconnect endpoint
+- [x] Initial webcam streaming infrastructure
 
 ## Frontend
 
@@ -115,12 +118,12 @@ Gesture and factor are sent separately.
 
 # Current Priority
 
-1. Implement backend webcam streaming
-2. Display webcam feed in the frontend
-3. Assemble hand
-4. Bluetooth integration
-5. Hardware testing
-6. Backend unit tests
+1. Validate backend webcam streaming with physical hardware.
+2. Display webcam feed in the frontend.
+3. Assemble hand.
+4. Bluetooth integration.
+5. Hardware testing.
+6. Backend unit tests.
 
 ---
 
@@ -135,6 +138,8 @@ Backend
 backend/server.js
 
 backend/services/BluetoothService.js
+
+backend/services/WebcamService.js
 
 backend/services/commandValidator.js
 
@@ -155,7 +160,7 @@ Merged
 
 Open
 
-- Webcam streaming (in progress)
+- None
 
 ---
 
@@ -171,16 +176,18 @@ Open
 
 Completed
 
-- Finished command protocol updates.
-- Updated project documentation.
-- Preparing webcam streaming implementation.
+- Implemented the initial backend webcam streaming infrastructure.
+- Added the `WebcamService`.
+- Added the `/api/webcam/stream` endpoint.
+- Installed and configured FFmpeg for local development.
 
 Next Session
 
-- Implement backend webcam service.
-- Add webcam view to the frontend.
+- Validate webcam streaming with a physical USB webcam.
+- Add the webcam feed to the frontend.
+- Update the README with webcam setup instructions.
 
 Notes
 
-- Webcam should be handled by the backend.
-- Browser only displays the video stream.
+- Webcam streaming is managed by the backend and remains separate from Bluetooth.
+- A physical webcam is required to fully validate the implementation.
