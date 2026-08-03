@@ -1,7 +1,6 @@
 # Yeah Hand - Project Status
 
-**Last Updated:** July 17, 2026
-
+**Last Updated:** August 2, 2026
 
 
 Purpose:
@@ -18,19 +17,23 @@ The goal of this project is to create a web application that allows users to rem
 
 Current architecture:
 
+```text
 Browser
 ↓
 React Frontend
 ↓
 Express Backend
-↓
-Bluetooth Service
-↓
-Yeah Hand Hardware
+├── Bluetooth Service
+│   ↓
+│   Yeah Hand Hardware
+│
+└── Webcam Streaming (in progress)
+    ↓
+    USB Webcam
+```
 
-Webcam streaming from the backend to the frontend is planned but not yet implemented.
+Webcam streaming is the current development priority and is now in progress.
 
----
 
 # Repository
 
@@ -39,9 +42,9 @@ PubInv/Yeah-Hand-Web-App
 
 Current Branch:
 
-oscar/update-command-protocol
+oscar/webcam-streaming
 
-Main Maintainer:
+Main Maintainers:
 
 Vittorio Lumare
 
@@ -69,6 +72,7 @@ Vittorio Lumare
 - [x] Backend setup guide
 - [x] Frontend setup guide
 - [x] Bluetooth test guide
+- [x] Command protocol documentation
 
 ## Protocol
 
@@ -111,11 +115,12 @@ Gesture and factor are sent separately.
 
 # Current Priority
 
-1. Webcam streaming
-2. Assemble hand
-3. Bluetooth integration
-4. Hardware testing
-5. Backend unit tests
+1. Implement backend webcam streaming
+2. Display webcam feed in the frontend
+3. Assemble hand
+4. Bluetooth integration
+5. Hardware testing
+6. Backend unit tests
 
 ---
 
@@ -145,11 +150,12 @@ docs/bluetooth-command-protocol.md
 
 Merged
 
--
+- README improvements
+- Backend/frontend setup documentation
 
 Open
 
--
+- Webcam streaming (in progress)
 
 ---
 
@@ -159,26 +165,22 @@ Open
 
 ---
 
-# Questions for Vittorio
-
-(Add anything that needs clarification.)
-
----
-
 # Session Log
 
-## July 17
+## August 2
 
 Completed
 
-- Updated command protocol
-- Opened PR #16
+- Finished command protocol updates.
+- Updated project documentation.
+- Preparing webcam streaming implementation.
 
 Next Session
 
-- Webcam streaming
-- Assemble hand
+- Implement backend webcam service.
+- Add webcam view to the frontend.
 
 Notes
 
-- Vittorio wants webcam before Bluetooth.
+- Webcam should be handled by the backend.
+- Browser only displays the video stream.
