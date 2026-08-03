@@ -1,5 +1,6 @@
 import express from "express";
 import bluetoothService from "./services/BluetoothService.js";
+import webcamService from "./services/WebcamService.js";
 import { validateCommand } from "./services/commandValidator.js";
 import cors from "cors";
 
@@ -12,6 +13,29 @@ app.use(express.json());
 // Health check route
 app.get("/", (req, res) => {
     res.send("Yeah Hand Backend API running");
+});
+
+// Webcam stream route
+app.get("/api/webcam/stream", (req, res) => {
+    try {
+        res.set({
+            "Content-Type": "multipart/x-mixed-replace; boundary=ffmpeg",
+            "Cache-Control": "no-store, no-cache, must-revalidate, private",
+            "Pragma": "no-cache",
+        });
+        res.flushHeaders();
+
+        webcamService.startStream(res);
+    } catch (err) {
+        if (res.headersSent) {
+            return res.end();
+        }
+
+        res.status(err.statusCode || 500).json({
+            success: false,
+            error: err.message,
+        });
+    }
 });
 
 // Connect route
